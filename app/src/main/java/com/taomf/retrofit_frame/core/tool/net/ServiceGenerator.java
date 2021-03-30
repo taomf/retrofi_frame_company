@@ -14,11 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * 备注：Retrofit生产者
- *
-
  * */
-
-
 public class ServiceGenerator {
 
     private static final String DOMAIN_BASE = "http://192.168.1.1";

@@ -1,6 +1,8 @@
 package com.taomf.retrofit_frame.core.base;
 
 
+import android.app.Activity;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
@@ -9,6 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
  * Desc   : 最顶层View
  */
 
-public class RootActivity extends AppCompatActivity {
+public class RootActivity extends Activity {
 
 }

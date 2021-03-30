@@ -1,9 +1,12 @@
 package com.taomf.retrofit_frame.core.base;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -26,10 +29,22 @@ public abstract class BaseActivity extends RootActivity {
         super.onCreate(savedInstanceState);
         //去除标题栏
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //去除状态栏
+//        if (getSupportActionBar() != null){
+//            getSupportActionBar().hide();
+//        }
 
+        //去除状态栏
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        //透明状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().setFlags(
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+
+
         setContentView(R.layout.activity_base);
         contentView = findViewById(R.id.fl_content);
         titleBar = findViewById(R.id.titlebar_layout);
@@ -38,38 +53,52 @@ public abstract class BaseActivity extends RootActivity {
 
         initTitlView();
 
-        init(savedInstanceState);
+        initOnCreate(savedInstanceState);
         process(savedInstanceState);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        toDoOnStart();
     }
+
+    protected abstract void toDoOnStart();
 
     @Override
     protected void onResume() {
         super.onResume();
-
         bindingPresenter();
         setTitleClickListener();
+        toDoOnResume();
     }
+
+    protected abstract void toDoOnResume();
 
     @Override
     protected void onPause() {
         super.onPause();
+        toDoOnPause();
     }
+
+    protected abstract void toDoOnPause();
 
     @Override
     protected void onStop() {
         super.onStop();
+        toDoOnStop();
     }
+
+    protected abstract void toDoOnStop();
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         listener = null;
+        toDoOnDestroy();
     }
+
+    protected abstract void toDoOnDestroy();
 
     @Override
     public void startActivity(Intent intent) {
@@ -116,6 +145,11 @@ public abstract class BaseActivity extends RootActivity {
 
     }
 
+    /**
+     * date   : 2021/3/30/14:54
+     * author : taomf
+     * Desc   : 获取到titleBar 上的 View
+     */
     public <T extends View> T getView(int id){
       return (T) titleBar.findViewById(id);
     }
@@ -125,7 +159,7 @@ public abstract class BaseActivity extends RootActivity {
 
     protected abstract void bindingPresenter();
 
-    protected abstract void init(Bundle savedInstanceState);
+    protected abstract void initOnCreate(Bundle savedInstanceState);
 
     protected abstract void process(Bundle savedInstanceState);
 

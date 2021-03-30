@@ -14,6 +14,8 @@ public class MainActivity extends MVPBaseActivity {
     protected IPresenter createPresenter() {
         return null;
     }
+
+
     /**
      * date   : 2021/3/30/10:11
      * author : taomf
@@ -29,13 +31,10 @@ public class MainActivity extends MVPBaseActivity {
         return R.layout.activity_main;
     }
 
-    @Override
-    protected void init(Bundle savedInstanceState) {
-
-    }
 
     @Override
     protected void process(Bundle savedInstanceState) {
+//        ServiceGenerator.getService(UploadFiel.class).uploadFiel();
 
     }
 }
