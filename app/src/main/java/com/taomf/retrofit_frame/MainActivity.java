@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.taomf.retrofit_frame.core.base.IPresenter;
 import com.taomf.retrofit_frame.core.base.MVPBaseActivity;
+import com.taomf.retrofit_frame.core.util.FastFrame;
 
 public class MainActivity extends MVPBaseActivity {
 
@@ -34,6 +35,7 @@ public class MainActivity extends MVPBaseActivity {
 
     @Override
     protected void process(Bundle savedInstanceState) {
+        FastFrame.init(getApplication());
 //        ServiceGenerator.getService(UploadFiel.class).uploadFiel();
 
     }
